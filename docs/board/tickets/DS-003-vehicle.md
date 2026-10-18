@@ -1,6 +1,6 @@
 # DS-003: vehicle: drone parameter model and registry
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** vehicle
 - **Milestone:** M1 Layered headless core
 - **Depends on:** DS-002

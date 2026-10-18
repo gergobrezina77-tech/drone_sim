@@ -8,6 +8,7 @@ from dataclasses import dataclass
 import mujoco
 import numpy as np
 
+from drone_sim.core.geometry import Box, Cylinder, Shape, closest_points, distance
 from drone_sim.drone import DroneParams
 
 REST_Z = 0.07  # body-origin height when a drone sits on its legs
@@ -25,31 +26,22 @@ class Obstacle:
     pos: tuple[float, float, float]
     size: tuple[float, ...]
 
-    def closest_point(self, p: np.ndarray) -> np.ndarray:
-        c = np.asarray(self.pos, dtype=float)
+    @property
+    def shape(self) -> Shape:
         if self.kind == "pillar":
             r, h = self.size
-            d = p[:, :2] - c[:2]
-            rho = np.linalg.norm(d, axis=1, keepdims=True)
-            xy = c[:2] + d / np.maximum(rho, 1e-9) * np.minimum(rho, r)
-            z = np.clip(p[:, 2:3], c[2], c[2] + h)
-            return np.hstack([xy, z])
+            return Cylinder(self.pos, r, h)
         if self.kind == "box":
-            h = np.asarray(self.size)
-            return np.clip(p, c - h, c + h)
+            return Box(self.pos, self.size)
         raise ValueError(f"unknown obstacle kind {self.kind!r}")
+
+    def closest_point(self, p: np.ndarray) -> np.ndarray:
+        return closest_points(p, [self.shape])[:, 0]
 
     def distance(self, p: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
         """Distance from points (n, 3) to the surface and the outward unit normal."""
-        diff = p - self.closest_point(p)
-        d = np.linalg.norm(diff, axis=1)
-        normal = diff / np.maximum(d, 1e-9)[:, None]
-        inside = d < 1e-9
-        if inside.any():  # fall back to a horizontal radial direction
-            radial = p[inside] - np.asarray(self.pos)
-            radial[:, 2] = 0.0
-            normal[inside] = radial / np.maximum(np.linalg.norm(radial, axis=1, keepdims=True), 1e-9)
-        return d, normal
+        d, normal = distance(p, [self.shape])
+        return d[:, 0], normal[:, 0]
 
     def mjcf(self) -> str:
         if self.kind == "pillar":

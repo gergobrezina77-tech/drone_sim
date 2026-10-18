@@ -6,6 +6,8 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from drone_sim.core.rotations import rot_z
+
 FORMATIONS = ("line", "v", "circle", "grid", "sphere", "helix")
 
 
@@ -56,11 +58,6 @@ def assign_slots(current: np.ndarray, slots: np.ndarray) -> np.ndarray:
         cost[i, :] = np.inf
         cost[:, j] = np.inf
     return out
-
-
-def rot_z(yaw: float) -> np.ndarray:
-    c, s = np.cos(yaw), np.sin(yaw)
-    return np.array([[c, -s, 0.0], [s, c, 0.0], [0.0, 0.0, 1.0]])
 
 
 def _smoothstep(x: float) -> float:
