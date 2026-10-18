@@ -35,6 +35,7 @@ dev = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = ["slow: performance regression guards (run by default; deselect with -m 'not slow')"]
 
 [tool.ruff]
 line-length = 120

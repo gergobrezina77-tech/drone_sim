@@ -12,9 +12,9 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
+| [DS-026](tickets/DS-026-physics.md) | physics: spatial prefilter for drone-drone collisions | physics | DS-013 |
 | [DS-015](tickets/DS-015-api.md) | api: protocol definition (commands + state frames) | api | DS-012 |
 | [DS-014](tickets/DS-014-legacy.md) | legacy: rebase SwarmSim, envs and CLI on the layers (soft) | legacy | DS-012 |
-| [DS-013](tickets/DS-013-engine.md) | engine: performance benchmark and budgets | engine | DS-012 |
 | [DS-025](tickets/DS-025-tasks.md) | tasks: several tasks per drone, run in sequence | tasks | DS-011 |
 | [DS-023](tickets/DS-023-vehicle.md) | vehicle: per-airframe rest height | vehicle | DS-006 |
 
@@ -40,6 +40,7 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
+| [DS-013](tickets/DS-013-engine.md) | engine: performance benchmark and budgets | engine | DS-012 |
 | [DS-012](tickets/DS-012-engine.md) | engine: simulation state machine and tick pipeline | engine | DS-008, DS-009, DS-010, DS-011 |
 | [DS-011](tickets/DS-011-tasks.md) | tasks: TaskType interface + goto_point evaluator | tasks | DS-004 |
 | [DS-010](tickets/DS-010-autonomy.md) | autonomy: FlightSoftware interface, controller, naive goto autopilot | autonomy | DS-007 |
