@@ -1,6 +1,6 @@
 # DS-011: tasks: TaskType interface + goto_point evaluator
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** tasks
 - **Milestone:** M1 Layered headless core
 - **Depends on:** DS-004

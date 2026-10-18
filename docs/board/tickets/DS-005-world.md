@@ -1,6 +1,6 @@
 # DS-005: world: editing commands with undo/redo and validation
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** world
 - **Milestone:** M1 Layered headless core
 - **Depends on:** DS-004

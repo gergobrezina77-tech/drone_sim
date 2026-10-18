@@ -1,6 +1,6 @@
 # DS-007: physics: PhysicsBackend interface and fleet state
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** physics
 - **Milestone:** M1 Layered headless core
 - **Depends on:** DS-004
