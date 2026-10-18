@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Commit subjects must be "DS-<n>: <title>" (ticket work) or "chore: <text>" (board/tooling only, no code).
+msg=$(head -n1 "$1")
+if [[ "$msg" =~ ^DS-[0-9]+:\ .+ ]]; then
+    exit 0
+fi
+if [[ "$msg" =~ ^chore:\ .+ ]]; then
+    if git diff --cached --name-only | grep -qE '^(src|tests|web)/'; then
+        echo "commit-msg: 'chore:' commits may not touch src/, tests/ or web/ — use the ticket id (DS-<n>: ...)." >&2
+        exit 1
+    fi
+    exit 0
+fi
+echo "commit-msg: subject must start with 'DS-<n>: ' or 'chore: '. Got: $msg" >&2
+exit 1
