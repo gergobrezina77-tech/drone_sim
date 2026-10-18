@@ -4,8 +4,8 @@
   writing start poses, no recompile.
 - Motor thrusts become a body wrench each substep, via each vehicle's allocation matrix ([T, tau] = A f) and the
   current attitude: equivalent to rotor-site motors, but linear in the number of drones (see ``mjcf.py``).
-- Collisions are geometric (see ``mjcf.py``): drone footprints against obstacle shapes, with an axis-aligned
-  bounding-box prefilter so exact distances are only computed for nearby pairs, and drone against drone.
+- Collisions are geometric (see ``mjcf.py`` and ``collision.py``): drone footprints against obstacle shapes and
+  against each other, with spatial prefilters so exact distances are only computed for nearby pairs.
 - Frozen drones are pinned back to their held pose after every physics step.
 """
 
@@ -14,20 +14,12 @@ from __future__ import annotations
 import mujoco
 import numpy as np
 
-from drone_sim.core.geometry import Box, Shape, distance
 from drone_sim.core.rotations import quat_to_mat
 from drone_sim.core.state import FleetState
+from drone_sim.physics.collision import aabb, touching_obstacles, touching_pairs
 from drone_sim.physics.mjcf import build_mjcf, drone_body_name
 from drone_sim.vehicle import get_vehicle
 from drone_sim.world import WorldSpec
-
-
-def _aabb(shape: Shape) -> tuple[np.ndarray, np.ndarray]:
-    if isinstance(shape, Box):
-        c, h = np.array(shape.center), np.array(shape.half_extents)
-        return c - h, c + h
-    b, r = np.array(shape.base), shape.radius
-    return b - (r, r, 0.0), b + (r, r, shape.height)
 
 
 class MujocoBackend:
@@ -64,7 +56,7 @@ class MujocoBackend:
         self._max_thrust = np.array([p.max_thrust for p in params])
         self._radius = np.array([p.radius for p in params])
         self._shapes = [o.shape for o in world.obstacles]
-        bounds = [_aabb(s) for s in self._shapes]
+        bounds = [aabb(s) for s in self._shapes]
         self._shape_lo = np.array([lo for lo, _ in bounds]).reshape(-1, 3)
         self._shape_hi = np.array([hi for _, hi in bounds]).reshape(-1, 3)
 
@@ -124,21 +116,11 @@ class MujocoBackend:
         return FleetState(qpos[:, :3].copy(), quat.copy(), quat_to_mat(quat), qvel[:, :3].copy(), qvel[:, 3:].copy())
 
     def collisions(self) -> np.ndarray:
-        pos, r = self.data.qpos[self._qpos[:, :3]], self._radius
-        hit = np.zeros(self.n, dtype=bool)
-        if self._shapes and self.n:
-            near = (
-                (pos[:, None, :] + r[:, None, None] >= self._shape_lo[None])
-                & (pos[:, None, :] - r[:, None, None] <= self._shape_hi[None])
-            ).all(axis=-1)
-            for j in np.flatnonzero(near.any(axis=0)):
-                idx = np.flatnonzero(near[:, j])
-                d, _ = distance(pos[idx], [self._shapes[j]])
-                hit[idx[d[:, 0] < r[idx]]] = True
-        if self.n > 1:
-            gap = np.linalg.norm(pos[:, None] - pos[None], axis=-1) - (r[:, None] + r[None])
-            np.fill_diagonal(gap, np.inf)
-            gap[self._frozen] = np.inf
-            gap[:, self._frozen] = np.inf
-            hit |= (gap < 0).any(axis=1)
-        return hit & ~self._frozen
+        live = ~self._frozen
+        pos = self.data.qpos[self._qpos[:, :3]]
+        hit = touching_obstacles(pos, self._radius, self._shapes, self._shape_lo, self._shape_hi)
+        i, j = touching_pairs(pos, self._radius)
+        both_live = live[i] & live[j]
+        hit[i[both_live]] = True
+        hit[j[both_live]] = True
+        return hit & live
