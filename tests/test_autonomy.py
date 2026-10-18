@@ -7,9 +7,10 @@ import pytest
 
 from drone_sim.autonomy import FLIGHT_SOFTWARE, FlightSoftware, Goals, GotoAutopilot, Observation
 from drone_sim.physics import PHYSICS_BACKENDS
-from drone_sim.vehicle import DroneParams, register_vehicle, vehicle_ids
+from drone_sim.vehicle import DEFAULT_VEHICLE, DroneParams, get_vehicle, register_vehicle, vehicle_ids
 from drone_sim.world import DroneSpec, WorldSpec
-from drone_sim.world.constructors import DRONE_REST_Z
+
+DRONE_REST_Z = get_vehicle(DEFAULT_VEHICLE).rest_height
 
 CONTROL_DT = 0.004
 

@@ -22,6 +22,7 @@ class DroneParams:
     yaw_coef: float = 0.016  # rotor drag torque / thrust, m
     drag_coef: float = 0.2  # linear aerodynamic drag, N / (m/s)
     radius: float = 0.18  # footprint radius (rotor tips) used by swarm logic and rewards, m
+    rest_height: float = 0.07  # body-origin height when resting on its legs, m
 
     @property
     def motor_angles(self) -> np.ndarray:

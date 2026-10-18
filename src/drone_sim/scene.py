@@ -10,8 +10,9 @@ import numpy as np
 
 from drone_sim.core.geometry import Box, Cylinder, Shape, closest_points, distance
 from drone_sim.drone import DroneParams
+from drone_sim.vehicle import DEFAULT_VEHICLE, get_vehicle
 
-REST_Z = 0.07  # body-origin height when a drone sits on its legs
+REST_Z = get_vehicle(DEFAULT_VEHICLE).rest_height  # body-origin height when a drone sits on its legs
 
 
 @dataclass(frozen=True)

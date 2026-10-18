@@ -9,8 +9,10 @@ import numpy as np
 
 from drone_sim.core.geometry import Cylinder
 from drone_sim.engine.simulation import Simulation
+from drone_sim.vehicle import DEFAULT_VEHICLE, get_vehicle
 from drone_sim.world import DroneSpec, MoveEntity, ObstacleSpec, TaskSpec, WorldEditor, WorldSpec
-from drone_sim.world.constructors import DRONE_REST_Z
+
+DRONE_REST_Z = get_vehicle(DEFAULT_VEHICLE).rest_height
 
 
 def benchmark_world(n: int, spacing: float = 1.5) -> WorldSpec:

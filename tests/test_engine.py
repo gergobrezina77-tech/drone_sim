@@ -14,6 +14,7 @@ from drone_sim.engine import (
     TaskSucceeded,
 )
 from drone_sim.tasks import FailureReason, TaskStatus
+from drone_sim.vehicle import DEFAULT_VEHICLE, get_vehicle
 from drone_sim.world import (
     AddObstacle,
     AssignTask,
@@ -25,8 +26,8 @@ from drone_sim.world import (
     WorldEditor,
     WorldSpec,
 )
-from drone_sim.world.constructors import DRONE_REST_Z
 
+DRONE_REST_Z = get_vehicle(DEFAULT_VEHICLE).rest_height
 START = (0.0, 0.0, DRONE_REST_Z)
 TARGET = [4.0, 0.0, 2.0]
 WALL = ObstacleSpec("wall", Box((2.0, 0.0, 1.5), (0.1, 3.0, 1.5)))

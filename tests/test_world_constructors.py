@@ -5,6 +5,7 @@ from dataclasses import dataclass
 import pytest
 
 from drone_sim.core.geometry import Box, Cylinder
+from drone_sim.vehicle import DEFAULT_VEHICLE, DroneParams, get_vehicle, register_vehicle, vehicle_ids
 from drone_sim.world import (
     SCENE_CONSTRUCTORS,
     AddObstacle,
@@ -15,7 +16,8 @@ from drone_sim.world import (
     WorldEditor,
     WorldSpec,
 )
-from drone_sim.world.constructors import DRONE_REST_Z
+
+REST_Z = get_vehicle(DEFAULT_VEHICLE).rest_height
 
 
 def run(editor: WorldEditor, constructor: str, action: dict) -> None:
@@ -38,7 +40,7 @@ def test_plan2d_pillar_from_a_circle():
 def test_plan2d_drone_is_placed_on_the_ground():
     ed = WorldEditor(WorldSpec())
     run(ed, "plan2d", {"op": "drone", "at": [1.0, 2.0], "yaw": 0.5})
-    assert ed.world.drones == (DroneSpec("drone1", position=(1.0, 2.0, DRONE_REST_Z), yaw=0.5),)
+    assert ed.world.drones == (DroneSpec("drone1", position=(1.0, 2.0, REST_Z), yaw=0.5),)
 
 
 def test_generated_ids_skip_ids_already_in_use():
@@ -103,3 +105,12 @@ def test_a_batch_is_validated_as_a_whole():
     with pytest.raises(InvalidEdit, match="inside obstacle"):
         run(ed, "test_grid", {"n": 2, "spacing": 2.0})  # pillar g1_1 lands on the drone
     assert ed.world == before
+
+
+def test_plan2d_places_each_vehicle_at_its_own_rest_height():
+    if "test_tall_legs" not in vehicle_ids():
+        register_vehicle("test_tall_legs", DroneParams(rest_height=0.15))
+    ed = WorldEditor(WorldSpec())
+    run(ed, "plan2d", {"op": "drone", "at": [0.0, 0.0], "vehicle": "test_tall_legs"})
+    run(ed, "plan2d", {"op": "drone", "at": [2.0, 0.0]})
+    assert [d.position[2] for d in ed.world.drones] == [0.15, 0.07]

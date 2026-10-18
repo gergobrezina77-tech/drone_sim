@@ -7,9 +7,10 @@ import pytest
 
 from drone_sim.core.geometry import Box, Cylinder
 from drone_sim.physics import PHYSICS_BACKENDS
-from drone_sim.vehicle import get_vehicle
+from drone_sim.vehicle import DEFAULT_VEHICLE, get_vehicle
 from drone_sim.world import DroneSpec, ObstacleSpec, WorldSpec
-from drone_sim.world.constructors import DRONE_REST_Z
+
+DRONE_REST_Z = get_vehicle(DEFAULT_VEHICLE).rest_height
 
 PARAMS = get_vehicle("quad_x_500g")
 
