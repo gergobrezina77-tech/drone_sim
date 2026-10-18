@@ -15,7 +15,31 @@ poetry run pytest
 Viewer keys: `6` next formation · `7` toggle formation/boids · `8` wind gust · `9` clear trails.
 Common options: `--mode boids`, `--wind 2 --turbulence 0.8`, `--no-obstacles`, `--n 30`.
 
-## What's inside
+## Layered engine
+
+A layered simulation engine (`core`, `vehicle`, `world`, `physics`, `environment`, `autonomy`, `tasks`, `engine`,
+`api`) is being built for an interactive editor: author a world, place drones, give them tasks, run, watch them
+succeed or fail, reset, edit, run again. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and the work board in
+[docs/board/BOARD.md](docs/board/BOARD.md).
+
+```python
+from drone_sim.engine import Simulation
+from drone_sim.world import AssignTask, DroneSpec, PlaceDrone, TaskSpec
+
+sim = Simulation()
+sim.edit(PlaceDrone(DroneSpec("d1", position=(0.0, 0.0, 0.07))))
+sim.edit(AssignTask(TaskSpec("t1", "d1", "goto_point", {"target": [4.0, 0.0, 2.0]})))
+sim.start()
+sim.run_until_finished(30.0)
+print(sim.report())
+```
+
+`poetry run python scripts/bench.py` prints compile / restart / per-tick cost for 10, 100 and 500 drones.
+
+## What's inside (swarm simulator)
+
+The modules below are the original swarm simulator, which keeps working beside the layered engine; see the legacy
+section of [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for what moved into the layers.
 
 | module | what it does |
 | --- | --- |

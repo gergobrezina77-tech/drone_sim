@@ -62,7 +62,22 @@ observe(fleet state) → autonomy.step → effects.step (forces) → physics.ste
 
 ## Legacy code
 
-The original modules (`sim.py`, `swarm.py`, `planner.py`, `envs/`, `cli.py`) keep working; they are migrated onto
-the layers as tickets allow (DS-014), but keeping them alive is not a hard requirement.
+The original swarm simulator (`sim.py`, `swarm.py`, `planner.py`, `scene.py`, `drone.py`, `render.py`, `envs/`,
+`cli.py`) keeps working beside the layers; it is not part of the layer contract. Shared building blocks were moved
+into the layers and the legacy modules re-export them:
+
+| Legacy name | Now lives in |
+| --- | --- |
+| `drone.quat_to_mat`, `planner.rot_z` | `core.rotations` |
+| `drone.DroneState` | `core.FleetState` |
+| `drone.DroneParams`, `drone.GRAVITY` | `vehicle` |
+| `scene.Obstacle.distance` / `closest_point` | `core.geometry` (via `Obstacle.shape`) |
+| `disturbances.*` (wind) | `environment.wind` |
+| `controller.*` | `autonomy.control` |
+
+Still separate, on purpose (DS-014): the legacy MuJoCo scene (`scene.build_scene` + `drone.DroneGroup`) simulates
+physical drone-obstacle and drone-drone contact with rotor-site motor actuators, while `physics.MujocoBackend`
+detects contact geometrically (no bounce) and applies thrust as a body wrench. Porting `SwarmSim` would change its
+physics; porting the Gym envs needs per-episode mass/inertia randomisation in the backend (DS-027).
 
 Work is tracked in [board/BOARD.md](board/BOARD.md).
