@@ -12,8 +12,8 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
+| [DS-015](tickets/DS-015-api.md) | api: protocol definition (commands + state frames) | api | DS-012, DS-028 |
 | [DS-027](tickets/DS-027-legacy.md) | legacy: Gym envs on the physics backend | legacy | DS-014 |
-| [DS-015](tickets/DS-015-api.md) | api: protocol definition (commands + state frames) | api | DS-012 |
 | [DS-025](tickets/DS-025-tasks.md) | tasks: several tasks per drone, run in sequence | tasks | DS-011 |
 
 ## Backlog
@@ -41,6 +41,7 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
+| [DS-028](tickets/DS-028-world.md) | world: per-entity JSON (de)serialisation | world | DS-004 |
 | [DS-026](tickets/DS-026-physics.md) | physics: spatial prefilter for drone-drone collisions | physics | DS-013 |
 | [DS-023](tickets/DS-023-vehicle.md) | vehicle: per-airframe rest height | vehicle | DS-006 |
 | [DS-014](tickets/DS-014-legacy.md) | legacy: rebase SwarmSim, envs and CLI on the layers (soft) | legacy | DS-012 |

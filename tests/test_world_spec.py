@@ -75,3 +75,10 @@ def test_geometry_hash_changes_with_what_the_physics_model_depends_on():
     bigger_arena = dataclasses.replace(world, arena_size=(80.0, 30.0, 15.0))
     hashes = {w.geometry_hash() for w in (world, extra_obstacle, extra_drone, other_vehicle, bigger_arena)}
     assert len(hashes) == 5
+
+
+def test_each_entity_round_trips_on_its_own():
+    world = sample_world()
+    for entity in (*world.obstacles, *world.drones, *world.tasks):
+        assert type(entity).from_dict(entity.to_dict()) == entity
+    assert world.to_dict()["drones"][0] == world.drones[0].to_dict()

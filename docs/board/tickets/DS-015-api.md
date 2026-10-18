@@ -3,7 +3,7 @@
 - **Status:** Ready
 - **Layer:** api
 - **Milestone:** M2 Server and web UI
-- **Depends on:** DS-012
+- **Depends on:** DS-012, DS-028
 
 ## Goal
 

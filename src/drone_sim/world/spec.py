@@ -24,6 +24,13 @@ class ObstacleSpec:
     id: str
     shape: Shape
 
+    def to_dict(self) -> dict[str, Any]:
+        return {"id": self.id, "shape": _shape_to_dict(self.shape)}
+
+    @classmethod
+    def from_dict(cls, d: dict[str, Any]) -> ObstacleSpec:
+        return cls(d["id"], _shape_from_dict(d["shape"]))
+
 
 @dataclass(frozen=True)
 class DroneSpec:
@@ -32,6 +39,13 @@ class DroneSpec:
     yaw: float = 0.0
     vehicle: str = DEFAULT_VEHICLE
 
+    def to_dict(self) -> dict[str, Any]:
+        return {"id": self.id, "position": list(self.position), "yaw": self.yaw, "vehicle": self.vehicle}
+
+    @classmethod
+    def from_dict(cls, d: dict[str, Any]) -> DroneSpec:
+        return cls(d["id"], _vec3(d["position"]), float(d.get("yaw", 0.0)), d.get("vehicle", DEFAULT_VEHICLE))
+
 
 @dataclass(frozen=True)
 class TaskSpec:
@@ -39,6 +53,13 @@ class TaskSpec:
     drone_id: str
     type: str
     params: dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {"id": self.id, "drone_id": self.drone_id, "type": self.type, "params": self.params}
+
+    @classmethod
+    def from_dict(cls, d: dict[str, Any]) -> TaskSpec:
+        return cls(d["id"], d["drone_id"], d["type"], d.get("params", {}))
 
 
 @dataclass(frozen=True)
@@ -53,11 +74,9 @@ class WorldSpec:
         return {
             "schema_version": SCHEMA_VERSION,
             "arena_size": list(self.arena_size),
-            "obstacles": [{"id": o.id, "shape": _shape_to_dict(o.shape)} for o in self.obstacles],
-            "drones": [
-                {"id": d.id, "position": list(d.position), "yaw": d.yaw, "vehicle": d.vehicle} for d in self.drones
-            ],
-            "tasks": [{"id": t.id, "drone_id": t.drone_id, "type": t.type, "params": t.params} for t in self.tasks],
+            "obstacles": [o.to_dict() for o in self.obstacles],
+            "drones": [d.to_dict() for d in self.drones],
+            "tasks": [t.to_dict() for t in self.tasks],
             "environment": self.environment,
         }
 
@@ -72,11 +91,9 @@ class WorldSpec:
             )
         return cls(
             arena_size=_vec3(data["arena_size"]),
-            obstacles=tuple(ObstacleSpec(o["id"], _shape_from_dict(o["shape"])) for o in data["obstacles"]),
-            drones=tuple(
-                DroneSpec(d["id"], _vec3(d["position"]), float(d["yaw"]), d["vehicle"]) for d in data["drones"]
-            ),
-            tasks=tuple(TaskSpec(t["id"], t["drone_id"], t["type"], t["params"]) for t in data["tasks"]),
+            obstacles=tuple(ObstacleSpec.from_dict(o) for o in data["obstacles"]),
+            drones=tuple(DroneSpec.from_dict(d) for d in data["drones"]),
+            tasks=tuple(TaskSpec.from_dict(t) for t in data["tasks"]),
             environment=data["environment"],
         )
 
