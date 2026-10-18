@@ -44,15 +44,14 @@ root_package = "drone_sim"
 
 # Layer architecture (see docs/ARCHITECTURE.md). Higher layers may import lower ones, never the reverse.
 # Layers on the same line separated by "|" are independent siblings and may not import each other.
-# Parenthesised layers are optional until their ticket creates the package; DS-001 removes the parentheses.
 [[tool.importlinter.contracts]]
 name = "Layered architecture"
 type = "layers"
 layers = [
-    "(drone_sim.api)",
-    "(drone_sim.engine)",
-    "(drone_sim.physics) | (drone_sim.environment) | (drone_sim.autonomy) | (drone_sim.tasks)",
-    "(drone_sim.world)",
-    "(drone_sim.vehicle)",
-    "(drone_sim.core)",
+    "drone_sim.api",
+    "drone_sim.engine",
+    "drone_sim.physics | drone_sim.environment | drone_sim.autonomy | drone_sim.tasks",
+    "drone_sim.world",
+    "drone_sim.vehicle",
+    "drone_sim.core",
 ]

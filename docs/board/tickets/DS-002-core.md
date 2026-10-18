@@ -1,6 +1,6 @@
 # DS-002: core: math and batched geometry primitives
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** core
 - **Milestone:** M1 Layered headless core
 - **Depends on:** DS-001
