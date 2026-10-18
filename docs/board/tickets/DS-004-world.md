@@ -1,6 +1,6 @@
 # DS-004: world: WorldSpec data model and JSON I/O
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** world
 - **Milestone:** M1 Layered headless core
 - **Depends on:** DS-003
