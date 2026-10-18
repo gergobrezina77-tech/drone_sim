@@ -98,6 +98,18 @@ class RemoveTask:
         return replace(world, tasks=tuple(t for t in world.tasks if t.id != self.id))
 
 
+@dataclass(frozen=True)
+class Batch:
+    """Several commands as one edit: validated once at the end, undone in one step."""
+
+    commands: tuple[Command, ...]
+
+    def apply(self, world: WorldSpec) -> WorldSpec:
+        for command in self.commands:
+            world = command.apply(world)
+        return world
+
+
 def _moved(shape: Shape, position: Vec3) -> Shape:
     return replace(shape, center=position) if isinstance(shape, Box) else replace(shape, base=position)
 

@@ -1,6 +1,6 @@
 # DS-023: vehicle: per-airframe rest height
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** vehicle
 - **Milestone:** M1 Layered headless core
 - **Depends on:** DS-006
