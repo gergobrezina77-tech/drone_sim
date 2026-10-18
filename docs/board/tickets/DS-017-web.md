@@ -1,6 +1,6 @@
 # DS-017: web: scaffold, connection and 3D view
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** web
 - **Milestone:** M2 Server and web UI
 - **Depends on:** DS-016
