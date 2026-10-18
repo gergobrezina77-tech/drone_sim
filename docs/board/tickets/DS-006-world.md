@@ -3,7 +3,7 @@
 - **Status:** Ready
 - **Layer:** world
 - **Milestone:** M1 Layered headless core
-- **Depends on:** DS-005
+- **Depends on:** DS-005, DS-022
 
 ## Goal
 

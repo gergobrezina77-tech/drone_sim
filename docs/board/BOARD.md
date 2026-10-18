@@ -12,7 +12,7 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
-| [DS-006](tickets/DS-006-world.md) | world: SceneConstructor interface + plan2d constructor | world | DS-005 |
+| [DS-006](tickets/DS-006-world.md) | world: SceneConstructor interface + plan2d constructor | world | DS-005, DS-022 |
 | [DS-011](tickets/DS-011-tasks.md) | tasks: TaskType interface + goto_point evaluator | tasks | DS-004 |
 | [DS-007](tickets/DS-007-physics.md) | physics: PhysicsBackend interface and fleet state | physics | DS-004 |
 
@@ -28,6 +28,7 @@ _none_
 | [DS-012](tickets/DS-012-engine.md) | engine: simulation state machine and tick pipeline | engine | DS-008, DS-009, DS-010, DS-011 |
 | [DS-013](tickets/DS-013-engine.md) | engine: performance benchmark and budgets | engine | DS-012 |
 | [DS-014](tickets/DS-014-legacy.md) | legacy: rebase SwarmSim, envs and CLI on the layers (soft) | legacy | DS-012 |
+| [DS-023](tickets/DS-023-vehicle.md) | vehicle: per-airframe rest height | vehicle | DS-006 |
 
 ### M2 Server and web UI
 
@@ -45,6 +46,7 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
+| [DS-022](tickets/DS-022-core.md) | core: generic name registry | core | DS-003 |
 | [DS-005](tickets/DS-005-world.md) | world: editing commands with undo/redo and validation | world | DS-004 |
 | [DS-004](tickets/DS-004-world.md) | world: WorldSpec data model and JSON I/O | world | DS-003 |
 | [DS-003](tickets/DS-003-vehicle.md) | vehicle: drone parameter model and registry | vehicle | DS-002 |
