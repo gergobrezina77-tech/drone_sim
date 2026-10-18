@@ -20,8 +20,7 @@ _none_
 
 ### M1 Layered headless core
 
-| Ticket | Title | Layer | Depends on |
-| --- | --- | --- | --- |
+_none_
 
 ### M2 Server and web UI
 
@@ -36,8 +35,7 @@ _none_
 
 ### Later
 
-| Ticket | Title | Layer | Depends on |
-| --- | --- | --- | --- |
+_none_
 
 ## Done
 
