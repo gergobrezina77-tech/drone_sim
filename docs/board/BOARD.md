@@ -12,7 +12,7 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
-| [DS-015](tickets/DS-015-api.md) | api: protocol definition (commands + state frames) | api | DS-012, DS-028 |
+| [DS-016](tickets/DS-016-api.md) | api: WebSocket server running the engine | api | DS-015 |
 | [DS-027](tickets/DS-027-legacy.md) | legacy: Gym envs on the physics backend | legacy | DS-014 |
 | [DS-025](tickets/DS-025-tasks.md) | tasks: several tasks per drone, run in sequence | tasks | DS-011 |
 
@@ -26,7 +26,6 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
-| [DS-016](tickets/DS-016-api.md) | api: WebSocket server running the engine | api | DS-015 |
 | [DS-017](tickets/DS-017-web.md) | web: scaffold, connection and 3D view | web | DS-016 |
 | [DS-018](tickets/DS-018-web.md) | web: run controls, status and outcome markers | web | DS-017 |
 | [DS-019](tickets/DS-019-web.md) | web: plan view editor | web | DS-018 |
@@ -41,6 +40,7 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
+| [DS-015](tickets/DS-015-api.md) | api: protocol definition (commands + state frames) | api | DS-012, DS-028 |
 | [DS-028](tickets/DS-028-world.md) | world: per-entity JSON (de)serialisation | world | DS-004 |
 | [DS-026](tickets/DS-026-physics.md) | physics: spatial prefilter for drone-drone collisions | physics | DS-013 |
 | [DS-023](tickets/DS-023-vehicle.md) | vehicle: per-airframe rest height | vehicle | DS-006 |
