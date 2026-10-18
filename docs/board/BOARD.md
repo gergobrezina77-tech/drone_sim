@@ -13,7 +13,6 @@ _none_
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
 | [DS-010](tickets/DS-010-autonomy.md) | autonomy: FlightSoftware interface, controller, naive goto autopilot | autonomy | DS-007 |
-| [DS-009](tickets/DS-009-environment.md) | environment: Effect interface + wind effect | environment | DS-007 |
 | [DS-023](tickets/DS-023-vehicle.md) | vehicle: per-airframe rest height | vehicle | DS-006 |
 | [DS-011](tickets/DS-011-tasks.md) | tasks: TaskType interface + goto_point evaluator | tasks | DS-004 |
 
@@ -43,6 +42,7 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
+| [DS-009](tickets/DS-009-environment.md) | environment: Effect interface + wind effect | environment | DS-007 |
 | [DS-008](tickets/DS-008-physics.md) | physics: MuJoCo backend with model cache and collision flags | physics | DS-007, DS-006 |
 | [DS-007](tickets/DS-007-physics.md) | physics: PhysicsBackend interface and fleet state | physics | DS-004, DS-024 |
 | [DS-024](tickets/DS-024-core.md) | core: FleetState shared runtime state | core | DS-002 |
