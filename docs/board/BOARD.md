@@ -12,9 +12,9 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
+| [DS-006](tickets/DS-006-world.md) | world: SceneConstructor interface + plan2d constructor | world | DS-005 |
 | [DS-011](tickets/DS-011-tasks.md) | tasks: TaskType interface + goto_point evaluator | tasks | DS-004 |
 | [DS-007](tickets/DS-007-physics.md) | physics: PhysicsBackend interface and fleet state | physics | DS-004 |
-| [DS-005](tickets/DS-005-world.md) | world: editing commands with undo/redo and validation | world | DS-004 |
 
 ## Backlog
 
@@ -22,7 +22,6 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
-| [DS-006](tickets/DS-006-world.md) | world: SceneConstructor interface + plan2d constructor | world | DS-005 |
 | [DS-008](tickets/DS-008-physics.md) | physics: MuJoCo backend with model cache and collision flags | physics | DS-007, DS-006 |
 | [DS-009](tickets/DS-009-environment.md) | environment: Effect interface + wind effect | environment | DS-007 |
 | [DS-010](tickets/DS-010-autonomy.md) | autonomy: FlightSoftware interface, controller, naive goto autopilot | autonomy | DS-007 |
@@ -46,6 +45,7 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
+| [DS-005](tickets/DS-005-world.md) | world: editing commands with undo/redo and validation | world | DS-004 |
 | [DS-004](tickets/DS-004-world.md) | world: WorldSpec data model and JSON I/O | world | DS-003 |
 | [DS-003](tickets/DS-003-vehicle.md) | vehicle: drone parameter model and registry | vehicle | DS-002 |
 | [DS-002](tickets/DS-002-core.md) | core: math and batched geometry primitives | core | DS-001 |

@@ -1,6 +1,6 @@
 # DS-006: world: SceneConstructor interface + plan2d constructor
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** world
 - **Milestone:** M1 Layered headless core
 - **Depends on:** DS-005
