@@ -140,3 +140,21 @@ def test_rng_stream_does_not_depend_on_creation_order():
     first = rng_stream(3, "sensors").random(3)
     rng_stream(3, "wind").random(100)  # another subsystem drawing numbers must not shift this one
     np.testing.assert_array_equal(rng_stream(3, "sensors").random(3), first)
+
+
+# --- fleet state -------------------------------------------------------------------------------------------------
+
+
+def test_fleet_state_is_shared_with_the_legacy_name():
+    from drone_sim.core import FleetState
+    from drone_sim.drone import DroneState
+
+    assert DroneState is FleetState
+    s = FleetState(
+        np.zeros((3, 3)),
+        np.tile([1.0, 0, 0, 0], (3, 1)),
+        np.tile(np.eye(3), (3, 1, 1)),
+        np.zeros((3, 3)),
+        np.zeros((3, 3)),
+    )
+    assert s.n == 3

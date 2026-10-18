@@ -12,9 +12,9 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
+| [DS-007](tickets/DS-007-physics.md) | physics: PhysicsBackend interface and fleet state | physics | DS-004, DS-024 |
 | [DS-023](tickets/DS-023-vehicle.md) | vehicle: per-airframe rest height | vehicle | DS-006 |
 | [DS-011](tickets/DS-011-tasks.md) | tasks: TaskType interface + goto_point evaluator | tasks | DS-004 |
-| [DS-007](tickets/DS-007-physics.md) | physics: PhysicsBackend interface and fleet state | physics | DS-004 |
 
 ## Backlog
 
@@ -45,6 +45,7 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
+| [DS-024](tickets/DS-024-core.md) | core: FleetState shared runtime state | core | DS-002 |
 | [DS-006](tickets/DS-006-world.md) | world: SceneConstructor interface + plan2d constructor | world | DS-005, DS-022 |
 | [DS-022](tickets/DS-022-core.md) | core: generic name registry | core | DS-003 |
 | [DS-005](tickets/DS-005-world.md) | world: editing commands with undo/redo and validation | world | DS-004 |

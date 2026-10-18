@@ -3,7 +3,7 @@
 - **Status:** Ready
 - **Layer:** physics
 - **Milestone:** M1 Layered headless core
-- **Depends on:** DS-004
+- **Depends on:** DS-004, DS-024
 
 ## Goal
 
@@ -11,7 +11,7 @@ Physics behind an interface so MuJoCo can be replaced or complemented later.
 
 ## Scope
 
-- `FleetState` struct-of-arrays: pos, quat, R, vel, omega (all `(n, …)`).
+- Uses `core.FleetState` (DS-024): pos, quat, R, vel, omega (all `(n, …)`).
 - `PhysicsBackend` protocol: `build(world, vehicles)`, `reset()`, `state() -> FleetState`, `set_thrusts((n,4))`, `set_external_forces((n,3))`, `step(substeps)`, `collisions() -> bool (n,)`, `freeze(mask)`, `timestep`.
 - Backend registry by name.
 

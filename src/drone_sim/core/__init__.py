@@ -2,3 +2,7 @@
 
 Imports nothing from other drone_sim layers.
 """
+
+from drone_sim.core.state import FleetState
+
+__all__ = ["FleetState"]

@@ -2,28 +2,17 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-
 import mujoco
 import numpy as np
 
 from drone_sim.core.rotations import quat_to_mat
+from drone_sim.core.state import FleetState
 from drone_sim.vehicle import GRAVITY, DroneParams
 
 __all__ = ["GRAVITY", "DroneGroup", "DroneParams", "DroneState", "quat_to_mat"]
 
 
-@dataclass
-class DroneState:
-    pos: np.ndarray  # (n, 3) world position
-    quat: np.ndarray  # (n, 4) orientation, w x y z
-    R: np.ndarray  # (n, 3, 3) body-to-world rotation
-    vel: np.ndarray  # (n, 3) world linear velocity
-    omega: np.ndarray  # (n, 3) body-frame angular velocity
-
-    @property
-    def n(self) -> int:
-        return len(self.pos)
+DroneState = FleetState
 
 
 class DroneGroup:
