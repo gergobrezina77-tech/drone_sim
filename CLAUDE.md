@@ -63,3 +63,28 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+---
+
+# Project workflow (drone-sim)
+
+Architecture and layer rules: `docs/ARCHITECTURE.md`. Work tracking: `docs/board/BOARD.md` + `docs/board/tickets/`.
+
+## Ticket loop — one ticket at a time
+
+1. **Pick:** take the first ticket in *Ready* (all dependencies Done). Move it to *In progress* in `BOARD.md` and set
+   its `Status:` line. Never have more than one ticket in progress.
+2. **Implement** only that ticket's scope. Anything else you notice becomes a new Backlog ticket, not a drive-by change.
+3. **Test:** add tests that cover every acceptance criterion. Tick the criteria in the ticket as they are met.
+4. **Gate:** `scripts/check.sh` must pass (ruff, import-linter layer contract, pytest). The Stop hook runs it too
+   and blocks finishing while it fails.
+5. **Close:** write decisions and measurements in the ticket's Notes, set `Status: Done`, move it to *Done* in
+   `BOARD.md`, promote Backlog tickets whose dependencies are now all Done to *Ready*.
+6. **Commit** once per ticket: `DS-XXX: <title>` (code + tests + board update together).
+
+If a ticket turns out to be wrong or too big, stop and say so; split or amend it on the board before coding.
+
+## Engineering rules
+
+- Respect the layers: never add an import that `lint-imports` rejects, and never weaken the contract to make it pass.
+- Extension points are a protocol + a name registry; callers look implementations up by name.
+- Fleet data is struct-of-arrays numpy; no per-drone Python loops in the simulation tick.
