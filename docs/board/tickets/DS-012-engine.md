@@ -1,6 +1,6 @@
 # DS-012: engine: simulation state machine and tick pipeline
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** engine
 - **Milestone:** M1 Layered headless core
 - **Depends on:** DS-008, DS-009, DS-010, DS-011

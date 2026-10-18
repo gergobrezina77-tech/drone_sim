@@ -12,8 +12,9 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
+| [DS-025](tickets/DS-025-tasks.md) | tasks: several tasks per drone, run in sequence | tasks | DS-011 |
+| [DS-012](tickets/DS-012-engine.md) | engine: simulation state machine and tick pipeline | engine | DS-008, DS-009, DS-010, DS-011 |
 | [DS-023](tickets/DS-023-vehicle.md) | vehicle: per-airframe rest height | vehicle | DS-006 |
-| [DS-011](tickets/DS-011-tasks.md) | tasks: TaskType interface + goto_point evaluator | tasks | DS-004 |
 
 ## Backlog
 
@@ -21,7 +22,6 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
-| [DS-012](tickets/DS-012-engine.md) | engine: simulation state machine and tick pipeline | engine | DS-008, DS-009, DS-010, DS-011 |
 | [DS-013](tickets/DS-013-engine.md) | engine: performance benchmark and budgets | engine | DS-012 |
 | [DS-014](tickets/DS-014-legacy.md) | legacy: rebase SwarmSim, envs and CLI on the layers (soft) | legacy | DS-012 |
 
@@ -41,6 +41,7 @@ _none_
 
 | Ticket | Title | Layer | Depends on |
 | --- | --- | --- | --- |
+| [DS-011](tickets/DS-011-tasks.md) | tasks: TaskType interface + goto_point evaluator | tasks | DS-004 |
 | [DS-010](tickets/DS-010-autonomy.md) | autonomy: FlightSoftware interface, controller, naive goto autopilot | autonomy | DS-007 |
 | [DS-009](tickets/DS-009-environment.md) | environment: Effect interface + wind effect | environment | DS-007 |
 | [DS-008](tickets/DS-008-physics.md) | physics: MuJoCo backend with model cache and collision flags | physics | DS-007, DS-006 |
