@@ -1,6 +1,6 @@
 # DS-013: engine: performance benchmark and budgets
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** engine
 - **Milestone:** M1 Layered headless core
 - **Depends on:** DS-012

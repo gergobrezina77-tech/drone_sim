@@ -3,3 +3,27 @@ that wires physics, environment, autonomy and tasks together; compile caching, e
 
 May import every layer below it. Must not import api.
 """
+
+from drone_sim.engine.events import (
+    DroneCollided,
+    Event,
+    RunFinished,
+    RunReport,
+    TaskFailed,
+    TaskOutcome,
+    TaskSucceeded,
+)
+from drone_sim.engine.simulation import IllegalTransition, SimState, Simulation
+
+__all__ = [
+    "DroneCollided",
+    "Event",
+    "IllegalTransition",
+    "RunFinished",
+    "RunReport",
+    "SimState",
+    "Simulation",
+    "TaskFailed",
+    "TaskOutcome",
+    "TaskSucceeded",
+]

@@ -1,6 +1,6 @@
 # DS-015: api: protocol definition (commands + state frames)
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** api
 - **Milestone:** M2 Server and web UI
 - **Depends on:** DS-012

@@ -1,6 +1,6 @@
 # DS-014: legacy: rebase SwarmSim, envs and CLI on the layers (soft)
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** legacy
 - **Milestone:** M1 Layered headless core
 - **Depends on:** DS-012
