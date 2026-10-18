@@ -1,6 +1,6 @@
 # DS-010: autonomy: FlightSoftware interface, controller, naive goto autopilot
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** autonomy
 - **Milestone:** M1 Layered headless core
 - **Depends on:** DS-007

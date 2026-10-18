@@ -1,6 +1,6 @@
 # DS-009: environment: Effect interface + wind effect
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** environment
 - **Milestone:** M1 Layered headless core
 - **Depends on:** DS-007

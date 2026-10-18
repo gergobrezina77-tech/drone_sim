@@ -1,6 +1,6 @@
 # DS-008: physics: MuJoCo backend with model cache and collision flags
 
-- **Status:** Backlog
+- **Status:** Ready
 - **Layer:** physics
 - **Milestone:** M1 Layered headless core
 - **Depends on:** DS-007, DS-006
